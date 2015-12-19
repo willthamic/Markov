@@ -8,7 +8,7 @@ function clearText() {
 function generateText() {
 	var length = $("#length").val();
 	if (length == "") {
-		length = 100;
+		length = $("#textInput").val().length;
 	}
 	if (order==0) {
 		generateText0(length);
