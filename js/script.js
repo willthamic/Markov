@@ -6,14 +6,18 @@ function clearText() {
 
 // Runs the correct function based on dropdown
 function generateText() {
+	var length = $("#length").val();
+	if (length == "") {
+		length = 100;
+	}
 	if (order==0) {
-		generateText0();
+		generateText0(length);
 	} else if (order==1) {
-		generateText1();
+		generateText1(length);
 	} else if (order==2) {
-		generateText2();
+		generateText2(length);
 	} else if (order==3) {
-		generateText3();
+		generateText3(length);
 	}
 }
 
@@ -48,7 +52,7 @@ function generateText0 (length) {
 		}
 	}
 	var output = [];
-	for (var i = 0; i < input.length; i++) {
+	for (var i = 0; i < length; i++) {
 		output.push(getRandomItem(characters, prob));
 	}
 	$( "#textOutput").text(output.join(""));
@@ -69,7 +73,7 @@ function generateText1 (length) {
 		}
 	}
 	var output = [getRandomLetter()];
-	for (var i = 0; i < input.length; i++) {
+	for (var i = 0; i < length-1; i++) {
 		var character = input.substr(i,1);
 		var subCharacters = [];
 		var subProb = [];
@@ -100,7 +104,7 @@ function generateText2 (length) {
 		}
 	}
 	var output = [getRandomLetter(),getRandomLetter()];
-	for (var i = 0; i < input.length; i++) {
+	for (var i = 0; i < length-2; i++) {
 		var character = input.substr(i,2);
 		var subCharacters = [];
 		var subProb = [];
@@ -131,7 +135,7 @@ function generateText3 (length) {
 		}
 	}
 	var output = [getRandomLetter(),getRandomLetter(),getRandomLetter()];
-	for (var i = 0; i < input.length; i++) {
+	for (var i = 0; i < length-3; i++) {
 		var character = input.substr(i,3);
 		var subCharacters = [];
 		var subProb = [];

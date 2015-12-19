@@ -36,7 +36,7 @@
 					</div>
 					<div class="card-action">
 						<!-- Dropdown Trigger -->
-						<a id="dropdown" class='dropdown-button btn-flat black-text' href='#' data-activates='dropdown1'>0th Order &#9660;</a>
+						<a id="dropdown" class='dropdown-button btn white-text blue' href='#' data-activates='dropdown1'>0th Order &#9660;</a>
 						<!-- Dropdown Structure -->
 						<ul style="white-space: nowrap;" id='dropdown1' class='dropdown-content'>
 							<li><a class="black-text" href="javascript:setOrder0();">0th Order </a></li>
@@ -44,7 +44,9 @@
 							<li><a class="black-text" href="javascript:setOrder2();">2nd Order </a></li>
 							<li><a class="black-text" href="javascript:setOrder3();">3rd Order </a></li>
 						</ul>
-						<a class="waves-effect waves-light btn-flat black-text" href="javascript:generateText();">Generate Text</a>
+						<p style="display:inline-block">Length: </p>
+						<input id="length" type="text" style="width:4em; text-align:right;" placeholder="Length">
+						<a class="waves-effect waves-light btn white-text blue" href="javascript:generateText();" style="float:right;">Generate Text</a>
 					</div>
 				</div>
 			</div>
@@ -55,7 +57,8 @@
 						<p id="textOutput"  style="word-wrap:break-word">After text is generated, it will appear in this box. Most likely. If it doesn't that is because this isn't actually working yet. You can tell because it's not generating text. Which is why this is stil here.</p>
 					</div>
 					<div class="card-action">
-						<a class="waves-effect waves-light btn-flat black-text" href="javascript:clearText();">Clear</a>
+						<a class="waves-effect waves-light btn white-text blue" href="javascript:clearText();">Clear</a>
+						<a class="waves-effect waves-light btn white-text blue" href="javascript:generateText();" style="float:right;">Generate Text</a>
 					</div>
 				</div>
 			</div>
