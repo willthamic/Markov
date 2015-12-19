@@ -12,11 +12,12 @@ function generateText() {
 		generateText1();
 	} else if (order==2) {
 		generateText2();
+	} else if (order==3) {
+		generateText3();
 	}
 }
 
-// Randomly generates text, no probability/weight
-function generateText0 () {
+function getRandomLetter () {
 	var input = $( "#textInput" ).val();
 	var characters = [];
 	var prob = [];
@@ -25,17 +26,15 @@ function generateText0 () {
 		if(characters.indexOf(character) == -1) {
 			characters.unshift(character);
 			prob.unshift(1/input.length);
+		} else {
+			prob[characters.indexOf(character)] += (1/input.length);
 		}
 	}
-	var output = [];
-	for (var i = 0; i < input.length; i++) {
-		output.push(getRandomItem(characters, prob));
-	}
-	$( "#textOutput").text(output.join(""));
+	return getRandomItem(characters, prob);
 }
 
 // Randomly generates text with probability
-function generateText1 () {
+function generateText0 (length) {
 	var input = $( "#textInput" ).val();
 	var characters = [];
 	var prob = [];
@@ -56,7 +55,7 @@ function generateText1 () {
 }
 
 // Randomly generates text with probability and reliance on previous character
-function generateText2 () {
+function generateText1 (length) {
 	var input = $( "#textInput" ).val();
 	var characters = [];
 	var prob = [];
@@ -69,11 +68,87 @@ function generateText2 () {
 			prob[characters.indexOf(character)] += (1/input.length);
 		}
 	}
-	var output = [];
+	var output = [getRandomLetter()];
 	for (var i = 0; i < input.length; i++) {
-		output.push(getRandomItem(characters, prob));
+		var character = input.substr(i,1);
+		var subCharacters = [];
+		var subProb = [];
+		for (var j = 0; j < characters.length; j++) {
+			if (characters[j].substr(0,1) == character) {
+				subCharacters.push(characters[j].substr(1,1));
+				subProb.push(prob[j]);
+			}
+		}
+		character = getRandomItem(subCharacters, subProb);
+		output.push(character);
 	}
 	$( "#textOutput").text(output.join(""));
+}
+
+// Randomly generates text with probability and reliance on two previous characters
+function generateText2 (length) {
+	var input = $( "#textInput" ).val();
+	var characters = [];
+	var prob = [];
+	for (var i = 0; i < input.length-2; i++) {
+		var character = input.substr(i,3);
+		if(characters.indexOf(character) == -1) {
+			characters.unshift(character);
+			prob.unshift(1/input.length);
+		} else {
+			prob[characters.indexOf(character)] += (1/input.length);
+		}
+	}
+	var output = [getRandomLetter(),getRandomLetter()];
+	for (var i = 0; i < input.length; i++) {
+		var character = input.substr(i,2);
+		var subCharacters = [];
+		var subProb = [];
+		for (var j = 0; j < characters.length; j++) {
+			if (characters[j].substr(0,2) == character) {
+				subCharacters.push(characters[j].substr(2,1));
+				subProb.push(prob[j]);
+			}
+		}
+		character = getRandomItem(subCharacters, subProb);
+		output.push(character);
+	}
+	$( "#textOutput").text(output.join(""));
+}
+
+// Randomly generates text with probability and reliance on three previous characters
+function generateText3 (length) {
+	var input = $( "#textInput" ).val();
+	var characters = [];
+	var prob = [];
+	for (var i = 0; i < input.length-3; i++) {
+		var character = input.substr(i,4);
+		if(characters.indexOf(character) == -1) {
+			characters.unshift(character);
+			prob.unshift(1/input.length);
+		} else {
+			prob[characters.indexOf(character)] += (1/input.length);
+		}
+	}
+	var output = [getRandomLetter(),getRandomLetter(),getRandomLetter()];
+	for (var i = 0; i < input.length; i++) {
+		var character = input.substr(i,3);
+		var subCharacters = [];
+		var subProb = [];
+		for (var j = 0; j < characters.length; j++) {
+			if (characters[j].substr(0,3) == character) {
+				subCharacters.push(characters[j].substr(3,1));
+				subProb.push(prob[j]);
+			}
+		}
+		character = getRandomItem(subCharacters, subProb);
+		output.push(character);
+	}
+	$( "#textOutput").text(output.join(""));
+}
+
+function add(a, b) {
+    return a + b;
 }
 
 function getRandomNumber(min, max) {
@@ -81,18 +156,16 @@ function getRandomNumber(min, max) {
 };
  
 function getRandomItem(array, prob) {
-    var totalProb = prob.reduce(function(a, b) {
-		return a + b;
-	});
+    var totalProb = prob.reduce(add, 0);
     var randomValue = getRandomNumber(0, totalProb);
     var probValue = 0;
     for (var i = 0; i < array.length; i++) {
         probValue += prob[i];
         if (randomValue <= probValue) {
-            return array[i];
+			return array[i];
         }
     }
-};
+}
 
 function setOrder0 () {
 	$( "#dropdown").text("0th Order \u25BC");
@@ -107,4 +180,9 @@ function setOrder1 () {
 function setOrder2 () {
 	$( "#dropdown").text("2nd Order \u25BC");
 	order = 2;
+}
+
+function setOrder3 () {
+	$( "#dropdown").text("3rd Order \u25BC");
+	order = 3;
 }

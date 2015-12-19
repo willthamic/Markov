@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 	<head>
-	<!--Import Google Icon Font-->
-	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	<!--Import materialize.css-->
-	<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
-	<link type="text/css" rel="stylesheet" href="css/stylesheet.css"/>
-
-	<!--Let browser know website is optimized for mobile-->
-	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<!--Import Google Icon Font-->
+		<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+		<!--Import materialize.css-->
+		<link type="text/css" rel="stylesheet" href="css/materialize.min.css"  media="screen,projection"/>
+		<link type="text/css" rel="stylesheet" href="css/stylesheet.css"/>
+			
+		<!--Let browser know website is optimized for mobile-->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<title>Markov Chain Tools</title>
 	</head>
 
 	<body>
@@ -40,7 +41,8 @@
 						<ul style="white-space: nowrap;" id='dropdown1' class='dropdown-content'>
 							<li><a class="black-text" href="javascript:setOrder0();">0th Order </a></li>
 							<li><a class="black-text" href="javascript:setOrder1();">1st Order </a></li>
-							<li><a class="red-text" href="javascript:setOrder2();">2nd Order </a></li>
+							<li><a class="black-text" href="javascript:setOrder2();">2nd Order </a></li>
+							<li><a class="black-text" href="javascript:setOrder3();">3rd Order </a></li>
 						</ul>
 						<a class="waves-effect waves-light btn-flat black-text" href="javascript:generateText();">Generate Text</a>
 					</div>
@@ -50,8 +52,7 @@
 				<div class="card white">
 					<div class="card-content black-text">
 						<h5>Output Text</h5>
-						<!--<p id="textOutput"  style="white-space: normal;">After text is generated, it will appear in this box. Most likely. If it doesn't that is because this isn't actually working yet. You can tell because it's not generating text. Which is why this is stil here.</p>-->
-						<p id="textOutput"  style="word-wrap:break-word">asdgasdoisjdlajsldjaojsdoijasodaosjdlajsdlkjasoijfoaujsdiuaosdnosdjfosndfinwidfoiwhmiawcuehfimewhmidfhascihdcfiawshmdiuhasmidicausmiudgmsaigmdiacsgiagmsidmgaisdiaisdiagidagsidxiasdihamsidhmaosd</p>
+						<p id="textOutput"  style="word-wrap:break-word">After text is generated, it will appear in this box. Most likely. If it doesn't that is because this isn't actually working yet. You can tell because it's not generating text. Which is why this is stil here.</p>
 					</div>
 					<div class="card-action">
 						<a class="waves-effect waves-light btn-flat black-text" href="javascript:clearText();">Clear</a>
