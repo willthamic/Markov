@@ -90,36 +90,36 @@ function generateText1 (length) {
 }
 
 // Randomly generates text with probability and reliance on two previous characters
-// function generateText1 (length) {
-// 	var input = $( "#textInput" ).val().split(" ");
-// 	var words = [];
-// 	var prob = [];
-// 	for (var i = 0; i < input.length-2; i++) {
-// 		var word = input[i];
-// 		if(words.indexOf(word) == -1) {
-// 			words.unshift(word);
-// 			prob.unshift(1/input.length);
-// 		} else {
-// 			prob[words.indexOf(word)] += (1/input.length);
-// 		}
-// 	}
-// 	var output = [getRandomWord(),getRandomWord()];
-// 	for (var i = 0; i < length-2; i++) {
-// 		var word = input[i] + " " + input[i-1];
-// 		var tword = words[i] + " " + words[i-1];
-// 		var subWords = [];
-// 		var subProb = [];
-// 		for (var j = 0; j < words.length; j++) {
-// 			if (tword == word) {
-// 				subWords.push(words[j]);
-// 				subProb.push(prob[j]);
-// 			}
-// 		}
-// 		word = getRandomItem(subWords, subProb);
-// 		output.push(word);
-// 	}
-// 	$( "#textOutput").text(output.join(" "));
-// }
+function generateText2 (length) {
+	var input = $( "#textInput" ).val().split(" ");
+	var words = [];
+	var prob = [];
+	for (var i = 0; i < input.length-2; i++) {
+		var word = input[i];
+		if(words.indexOf(word) == -1) {
+			words.unshift(word);
+			prob.unshift(1/input.length);
+		} else {
+			prob[words.indexOf(word)] += (1/input.length);
+		}
+	}
+	var output = [getRandomWord(),getRandomWord()];
+	for (var i = 0; i < length-2; i++) {
+		var word = input[i] + " " + input[i-1];
+		var tword = words[i] + " " + words[i-1];
+		var subWords = [];
+		var subProb = [];
+		for (var j = 0; j < words.length; j++) {
+			if (tword == word) {
+				subWords.push(words[j]);
+				subProb.push(prob[j]);
+			}
+		}
+		word = getRandomItem(subWords, subProb);
+		output.push(word);
+	}
+	$( "#textOutput").text(output.join(" "));
+}
 
 // Randomly generates text with probability and reliance on three previous characters
 function generateText3 (length) {

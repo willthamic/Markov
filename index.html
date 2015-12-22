@@ -34,39 +34,20 @@
 	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
+	<script type="text/javascript" src="js/script.js"></script>
     <script>
-        setInterval(
-            function(){
-                var input = document.getElementById("textInput").innerHTML;
-                var characters = [];
-                var prob = [];
-                var length = input.length;
-                for (var i = 0; i < input.length-3; i++) {
-                    var character = input.substr(i,4);
-                    if(characters.indexOf(character) == -1) {
-                        characters.unshift(character);
-                        prob.unshift(1/input.length);
-                    } else {
-                        prob[characters.indexOf(character)] += (1/input.length);
-                    }
-                }
-                var output = [getRandomLetter(),getRandomLetter(),getRandomLetter()];
-                for (var i = 0; i < length-3; i++) {
-                    var character = input.substr(i,3);
-                    var subCharacters = [];
-                    var subProb = [];
-                    for (var j = 0; j < characters.length; j++) {
-                        if (characters[j].substr(0,3) == character) {
-                            subCharacters.push(characters[j].substr(3,1));
-                            subProb.push(prob[j]);
-                        }
-                    }
-                    character = getRandomItem(subCharacters, subProb);
-                    output.push(character);
-                }
-                document.getElementById("textInput").innerHTML = output.join("");
-            }
-        , 5000);
+		var length = document.getElementById("textInput").innerHTML.length;
+		var x = 10000;
+		interval();
+		function interval () {
+			setTimeout(function(){
+				refreshText();
+				x -= 300;
+				x /= 1.5;
+				x += 300;
+				interval();
+			}, x);
+		}
     </script>
 	</body>
 </html>
