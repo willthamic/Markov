@@ -1,0 +1,15 @@
+.brand-logo .secondary-logo {
+    font-weight:200;
+}
+
+.brand-logo .primary-logo {
+    font-weight:400;
+}
+
+.title {
+    font-weight:300;
+}
+
+.hidden-text {
+    display:none;
+}

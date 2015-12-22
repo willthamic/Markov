@@ -15,60 +15,58 @@
 	<body>
 		<nav>
 			<div class="nav-wrapper blue">
-				<a href="#" class="brand-logo">Markov Chain Tools</a>
+				<div class="brand-logo">
+                    <a href="index.html"><span class="primary-logo">Markov Chain Tools </span></a>
+                </div>
 				<ul id="nav-mobile" class="right hide-on-med-and-down">
-					<li><a href="#">Nothing 1</a></li>
-					<li><a href="#">Nothing 2</a></li>
-					<li><a href="#">Nothing 3</a></li>
+					<li class="active"><a href="index.html">Home</a></li>
+					<li><a href="characters.html">Characters</a></li>
+					<li><a href="words.html">Words</a></li>
 				</ul>
 			</div>
 		</nav>
-		<div class="row">
-			<div class="col s12 m6">
-				<div class="card white">
-					<div class="card-content black-text">
-						<div class="row">
-							<h5>Input Text</h5>
-							<div class="input-field col s12">
-								<textarea id="textInput" class="materialize-textarea"></textarea>
-							</div>
-						</div>
-					</div>
-					<div class="card-action">
-						<!-- Dropdown Trigger -->
-						<a id="dropdown" class='dropdown-button btn white-text blue' href='#' data-activates='dropdown1'>0th Order &#9660;</a>
-						<!-- Dropdown Structure -->
-						<ul style="white-space: nowrap;" id='dropdown1' class='dropdown-content'>
-							<li><a class="black-text" href="javascript:setOrder0();">0th Order </a></li>
-							<li><a class="black-text" href="javascript:setOrder1();">1st Order </a></li>
-							<li><a class="black-text" href="javascript:setOrder2();">2nd Order </a></li>
-							<li><a class="black-text" href="javascript:setOrder3();">3rd Order </a></li>
-						</ul>
-						<p style="display:inline-block">Length: </p>
-						<input id="length" type="text" style="width:4em; text-align:right;" placeholder="Length">
-						<a class="waves-effect waves-light btn white-text blue" href="javascript:generateText();" style="float:right;">Generate Text</a>
-					</div>
-				</div>
-			</div>
-			<div class="col s12 m6">
-				<div class="card white">
-					<div class="card-content black-text">
-						<h5>Output Text</h5>
-						<p id="textOutput"  style="word-wrap:break-word">After text is generated, it will appear in this box. Most likely. If it doesn't that is because this isn't actually working yet. You can tell because it's not generating text. Which is why this is still here.</p>
-					</div>
-					<div class="card-action">
-						<a class="waves-effect waves-light btn white-text blue" href="javascript:clearText();">Clear</a>
-						<a class="waves-effect waves-light btn white-text blue" href="javascript:generateText();" style="float:right;">Generate Text</a>
-					</div>
-				</div>
-			</div>
-		</div>
-				
+        <div class="container">
+            <h3 class="title">Text generation using Markov Chains</h3>
+            <div class="divider"></div>
+            <p class="flow-text" id="textInput">I am eventually going to put stuff here, but for now I have to put boring and confusing text like this as I wrote a bunch of javascript and then forgot what it all meant. Normally I would write what is happening here and what it all means but I didn't leave any comments. Whoops. I probably should have thought of that in advance. I didn't though. Also this whole thing is only two commits. Not exactly the most refined way of making something. At this point I am just trying to type enough that when this starts changing there is enough sample space to make interesting things. Earlier the word whoops wouldn't change. I am hoping that now I have used the world whoops in a sentence it will be able to easily change to something else. I have no idea though. I forgot how this works as I had mentioned earlier. After further testing it isn't changing. I think the solution might be to either reduce the order of the Markov Chain or use other words in this text that are similar. Like hoops, loops and Who. </p>
+        </div>
 		
 	<!--Import jQuery before materialize.js-->
 	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="js/materialize.min.js"></script>
-	<script type="text/javascript" src="js/script.js"></script>
-	<script type="text/javascript" src="js/hashmap.js"></script>
+    <script>
+        setInterval(
+            function(){
+                var input = document.getElementById("textInput").innerHTML;
+                var characters = [];
+                var prob = [];
+                var length = input.length;
+                for (var i = 0; i < input.length-3; i++) {
+                    var character = input.substr(i,4);
+                    if(characters.indexOf(character) == -1) {
+                        characters.unshift(character);
+                        prob.unshift(1/input.length);
+                    } else {
+                        prob[characters.indexOf(character)] += (1/input.length);
+                    }
+                }
+                var output = [getRandomLetter(),getRandomLetter(),getRandomLetter()];
+                for (var i = 0; i < length-3; i++) {
+                    var character = input.substr(i,3);
+                    var subCharacters = [];
+                    var subProb = [];
+                    for (var j = 0; j < characters.length; j++) {
+                        if (characters[j].substr(0,3) == character) {
+                            subCharacters.push(characters[j].substr(3,1));
+                            subProb.push(prob[j]);
+                        }
+                    }
+                    character = getRandomItem(subCharacters, subProb);
+                    output.push(character);
+                }
+                document.getElementById("textInput").innerHTML = output.join("");
+            }
+        , 5000);
+    </script>
 	</body>
 </html>
